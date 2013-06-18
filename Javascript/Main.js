@@ -1,9 +1,10 @@
 var canvas;
 var context;
+var images;
 
 function main(){
 	initializeCanvas();
-	//load all art
+	loadImages();
 	//move into next state
 }
 
@@ -13,4 +14,12 @@ function initializeCanvas(){
 	canvas.width = 800;
 	canvas.height = 480;
 	document.body.appendChild(canvas);
+}
+
+function loadImages(){
+	var loadedimages = 0;
+	var imagePointers = [];
+	
+	imagePointers = ["Resources/Art/Image0.bmp",
+						"Resources/Art/Image1.bmp"];
 }
