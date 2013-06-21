@@ -3,6 +3,8 @@ var context;
 var images;
 
 function main(){
+
+	console.log("entered main");
 	initializeCanvas();
 	loadImages();
 	//move into next state
