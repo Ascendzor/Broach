@@ -1,0 +1,15 @@
+Broach
+=
+
+Broach is a game engine, under active development. The target is 2d games. We
+know that its a "bad idea" to reinvent the wheel (more alternatives like cocos2d exist).
+But this is going to be more fun, and maybe an opportunity to learn something new.
+
+What we want eventually
+==
+* Scene management
+* Tree structure for sprite management (think cocos2d)
+* Event system.
+
+Feel free to submit a pull request, or maybe help out by effecting the course
+which development follows.
