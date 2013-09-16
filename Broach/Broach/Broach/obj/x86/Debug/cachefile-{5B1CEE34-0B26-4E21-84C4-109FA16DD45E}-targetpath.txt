@@ -1,6 +1,0 @@
-Content\NewGame.xnb
-Content\Continue.xnb
-Content\Exit.xnb
-Content\ContinueLabel.xnb
-Content\MainMenuLabel.xnb
-Content\NewGameLabel.xnb
