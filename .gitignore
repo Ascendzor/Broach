@@ -1,4 +1,4 @@
-Broach/Broach/obj
-Broach/Broach/BroachContent/obj
-Broach/Broach/Broach/bin
-Broach/Broach/Broach/obj
+**/bin/Debug/
+**/obj/
+**/bin/Release/
+
