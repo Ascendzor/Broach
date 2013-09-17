@@ -1,0 +1,14 @@
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Broach.exe
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Broach.pdb
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\obj\x86\Debug\Broach.csprojResolveAssemblyReference.cache
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\obj\x86\Debug\Broach.exe
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\obj\x86\Debug\Broach.pdb
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Content\NewGame.xnb
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Content\Continue.xnb
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Content\Exit.xnb
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\obj\x86\Debug\Broach.Form1.resources
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\obj\x86\Debug\Broach.csproj.GenerateResource.Cache
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Content\ContinueLabel.xnb
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Content\MainMenuLabel.xnb
+C:\Users\Ascendzor\Public\Programming\Broach\Broach\Broach\Broach\bin\x86\Debug\Content\NewGameLabel.xnb
