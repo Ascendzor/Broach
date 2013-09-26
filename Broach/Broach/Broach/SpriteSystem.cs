@@ -55,6 +55,7 @@ namespace Broach
         /// </summary>
         public void Clear()
         {
+            sprites = new List<SpriteComponent>();
         }
     }
 }

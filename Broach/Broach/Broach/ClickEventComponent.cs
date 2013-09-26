@@ -27,13 +27,16 @@ namespace Broach
         public override void Update()
         {
             MouseState mouse = Mouse.GetState();
-            if (mouse.X > target.X && mouse.X < target.X + target.Width)
+            if (mouse.LeftButton == ButtonState.Pressed)
             {
-                if (mouse.Y > target.Y && mouse.Y < target.Y + target.Height)
+                if (mouse.X > target.X && mouse.X < target.X + target.Width)
                 {
-                    onClick();
+                    if (mouse.Y > target.Y && mouse.Y < target.Y + target.Height)
+                    {
+                        onClick();
+                    }
+                    
                 }
-                
             }
         }
     }
