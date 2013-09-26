@@ -17,19 +17,11 @@ namespace Broach
         protected Game1 parent;
         protected List<Node> nodes;
         
-        public void update()
+        public void Update()
         {
             foreach (Node node in nodes)
             {
-                node.update();
-            }
-        }
-
-        public void draw(SpriteBatch spriteBatch)
-        {
-            foreach (Node node in nodes)
-            {
-                node.draw(spriteBatch);
+                node.Update();
             }
         }
     }

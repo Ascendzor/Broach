@@ -19,8 +19,9 @@ namespace Broach
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static SpriteSystem SpriteRenderer;
         public static Scene scene;
+
 
         public Game1()
         {
@@ -33,9 +34,7 @@ namespace Broach
             ((Form)Form.FromHandle(this.Window.Handle)).Cursor = System.Windows.Forms.Cursors.Cross;
 
             IsMouseVisible = true;
-            
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice));
             scene = new MainMenu(Content);
 
             base.Initialize();
@@ -43,18 +42,14 @@ namespace Broach
 
         protected override void Update(GameTime gameTime)
         {
-            scene.update();
+            scene.Update();
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin();
-            scene.draw(spriteBatch);
-            spriteBatch.End();
-
+            SpriteRenderer.Draw();
             base.Draw(gameTime);
         }
     }

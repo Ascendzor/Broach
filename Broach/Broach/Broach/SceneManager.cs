@@ -13,18 +13,22 @@ namespace Broach
 {
     public class SceneManager
     {
+        
         public static void handleNewGame(ContentManager Content)
         {
+            Game1.SpriteRenderer.Clear();
             Game1.scene = new NewGame(Content);
         }
 
         public static void handleMainMenu(ContentManager Content)
         {
+            Game1.SpriteRenderer.Clear();
             Game1.scene = new MainMenu(Content);
         }
 
         public static void handleContinue(ContentManager Content)
         {
+            Game1.SpriteRenderer.Clear();
             Game1.scene = new Continue(Content);
         }
     }

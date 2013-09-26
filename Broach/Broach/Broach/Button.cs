@@ -13,31 +13,18 @@ namespace Broach
 {
     class Button : Node
     {
-        Action clickAction;
         public Button(object parent, Vector2 position, Texture2D texture, Action clickAction)
         {
             this.parent = parent;
-            this.position = position;
-            this.texture = texture;
-            this.clickAction = clickAction;
-        }
 
-        public override void update()
-        {
-            //on mouse click
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                //check if the click inside the texture of the button
-                if((Mouse.GetState().X > position.X) && (Mouse.GetState().X < (position.X+texture.Width)) && (Mouse.GetState().Y > position.Y) && (Mouse.GetState().Y < (position.Y+texture.Height)))
-                {
-                    clickAction();
-                }
-            }
-        }
+            // Add the Sprite component
+            Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); 
+            SpriteComponent buttonSprite = new SpriteComponent(this, texture, buttonSize);
+            Components.Add(buttonSprite);
 
-        public override void draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, position, Color.White);
+            // add the click component
+            ClickEventComponent clickClak = new ClickEventComponent(clickAction, buttonSize);
+            Components.Add(clickClak);
         }
     }
 }

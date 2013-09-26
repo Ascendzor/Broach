@@ -18,15 +18,13 @@ namespace Broach
             this.parent = parent;
             this.position = position;
             this.texture = texture;
+            Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); 
+            SpriteComponent buttonSprite = new SpriteComponent(this, texture, buttonSize);
+            Components.Add(buttonSprite);
         }
 
-        public override void update()
+        public override void Update()
         {
-        }
-
-        public override void draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, position, Color.White);
         }
     }
 }

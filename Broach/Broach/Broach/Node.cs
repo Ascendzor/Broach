@@ -12,14 +12,30 @@ using System.Windows.Forms;
 
 namespace Broach
 {
-    public abstract class Node
+    public class Node
     {
         protected object parent;
         protected Vector2 position;
         protected Texture2D texture;
 
-        public abstract void update();
+        private List<GameComponent> components;
 
-        public abstract void draw(SpriteBatch spriteBatch);
+        public List<GameComponent> Components
+        {
+            get { return components; }
+            set { components = value; }
+        }
+        
+        public Node()
+        {
+            components = new List<GameComponent>();
+        }
+        public virtual void Update()
+        {
+            foreach (GameComponent component in components)
+            {
+                component.Update();
+            }
+        }
     }
 }
