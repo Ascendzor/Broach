@@ -112,6 +112,7 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="ClickEventComponent.cs" />
+    <Compile Include="ClickSystem.cs" />
     <Compile Include="Continue.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

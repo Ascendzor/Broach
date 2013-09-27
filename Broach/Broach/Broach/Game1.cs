@@ -20,6 +20,7 @@ namespace Broach
     {
         GraphicsDeviceManager graphics;
         public static SpriteSystem SpriteRenderer;
+        public static ClickSystem ClickSystem;
         public static Scene scene;
 
 
@@ -35,6 +36,7 @@ namespace Broach
 
             IsMouseVisible = true;
             SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice));
+            ClickSystem = new ClickSystem();
             scene = new MainMenu(Content);
 
             base.Initialize();
@@ -42,7 +44,7 @@ namespace Broach
 
         protected override void Update(GameTime gameTime)
         {
-            scene.Update();
+            ClickSystem.Update();
             base.Update(gameTime);
         }
 
