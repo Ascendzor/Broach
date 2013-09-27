@@ -15,29 +15,27 @@ namespace Broach
     /// <summary>
     /// A Game component which makes the entity respond to mouse click being pressed while targeted in the given coordinates
     /// </summary>
-    class ClickEventComponent : GameComponent
+    public class ClickEventComponent : GameComponent
     {
         private Action onClick;
         private Rectangle target;
-        public ClickEventComponent(Action onclick, Rectangle target)
+
+        public Action OnClick
         {
-            onClick = onclick;
-            this.target = target;
+            get { return onClick; }
         }
-        public override void Update()
+
+        public Rectangle Target
         {
-            MouseState mouse = Mouse.GetState();
-            if (mouse.LeftButton == ButtonState.Pressed)
-            {
-                if (mouse.X > target.X && mouse.X < target.X + target.Width)
-                {
-                    if (mouse.Y > target.Y && mouse.Y < target.Y + target.Height)
-                    {
-                        onClick();
-                    }
-                    
-                }
-            }
+            get { return target; }
+        }
+
+        public ClickEventComponent(Action onClick, Rectangle target)
+        {
+            this.onClick = onClick;
+            this.target = target;
+
+            Game1.ClickSystem.ClickComponents.Add(this);
         }
     }
 }
