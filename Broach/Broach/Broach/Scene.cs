@@ -14,15 +14,8 @@ namespace Broach
 {
     public abstract class Scene
     {
-        protected Game1 parent;
         protected List<Node> nodes;
-        
-        public void Update()
-        {
-            foreach (Node node in nodes)
-            {
-                node.Update();
-            }
-        }
+
+        public abstract void onEnter();
     }
 }

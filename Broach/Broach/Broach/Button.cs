@@ -15,8 +15,6 @@ namespace Broach
     {
         public Button(object parent, Vector2 position, Texture2D texture, Action clickAction)
         {
-            this.parent = parent;
-
             // Add the Sprite component
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); 
             SpriteComponent buttonSprite = new SpriteComponent(this, texture, buttonSize);

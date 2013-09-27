@@ -14,10 +14,6 @@ namespace Broach
 {
     public class Node
     {
-        protected object parent;
-        protected Vector2 position;
-        protected Texture2D texture;
-
         private List<GameComponent> components;
 
         public List<GameComponent> Components
@@ -29,13 +25,6 @@ namespace Broach
         public Node()
         {
             components = new List<GameComponent>();
-        }
-        public virtual void Update()
-        {
-            foreach (GameComponent component in components)
-            {
-                component.Update();
-            }
         }
     }
 }

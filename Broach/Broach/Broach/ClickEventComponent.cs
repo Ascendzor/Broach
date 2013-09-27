@@ -17,25 +17,34 @@ namespace Broach
     /// </summary>
     public class ClickEventComponent : GameComponent
     {
-        private Action onClick;
         private Rectangle target;
-
-        public Action OnClick
-        {
-            get { return onClick; }
-        }
 
         public Rectangle Target
         {
             get { return target; }
+            set { target = value; }
         }
+        
 
-        public ClickEventComponent(Action onClick, Rectangle target)
+        private Action onClick;
+
+        public Action OnClick
         {
-            this.onClick = onClick;
+            get { return onClick; }
+            set { onClick = value; }
+        }
+        
+        public ClickEventComponent(Action onclick, Rectangle target)
+        {
+            if (onclick == null ||target == null)
+            {
+                throw new ArgumentNullException();
+            }
+            onClick = onclick;
             this.target = target;
 
-            Game1.ClickSystem.ClickComponents.Add(this);
+            // add self to the clicksystem aspect
+            Game1.ClickSystem.ClickEvents.Add(this);
         }
     }
 }

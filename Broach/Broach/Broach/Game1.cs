@@ -19,9 +19,14 @@ namespace Broach
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
+        // renderer aspect
         public static SpriteSystem SpriteRenderer;
-        public static ClickSystem ClickSystem;
-        public static Scene scene;
+
+        // click event aspect
+        public static ClickEventSystem ClickSystem;
+
+        // scene aspect updates the scene after any other updates have happened
+        public static SceneSystem SceneController;
 
 
         public Game1()
@@ -36,8 +41,9 @@ namespace Broach
 
             IsMouseVisible = true;
             SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice));
-            ClickSystem = new ClickSystem();
-            scene = new MainMenu(Content);
+            SceneController = new SceneSystem();
+            ClickSystem = new ClickEventSystem();
+            SceneController.Handle(SceneFactory.getMainMenu(Content));
 
             base.Initialize();
         }
@@ -45,6 +51,7 @@ namespace Broach
         protected override void Update(GameTime gameTime)
         {
             ClickSystem.Update();
+            SceneController.Update();
             base.Update(gameTime);
         }
 

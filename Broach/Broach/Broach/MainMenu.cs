@@ -32,14 +32,18 @@ namespace Broach
             nodes.Add(exitButton);
         }
 
+        public override void onEnter()
+        {
+            Console.WriteLine("Loaded the Main Menu scene");
+        }
         public void newGameButtonClicked()
         {
-            SceneManager.handleNewGame(Content);
+            Game1.SceneController.Handle(SceneFactory.getNewGame(Content));
         }
 
         public void continueButtonClicked()
         {
-            SceneManager.handleContinue(Content);
+            Game1.SceneController.Handle(SceneFactory.getContinueScene(Content));
         }
 
         public void exitButtonClicked()

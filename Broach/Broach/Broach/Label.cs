@@ -15,16 +15,9 @@ namespace Broach
     {
         public Label(object parent, Vector2 position, Texture2D texture)
         {
-            this.parent = parent;
-            this.position = position;
-            this.texture = texture;
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); 
             SpriteComponent buttonSprite = new SpriteComponent(this, texture, buttonSize);
             Components.Add(buttonSprite);
-        }
-
-        public override void Update()
-        {
         }
     }
 }

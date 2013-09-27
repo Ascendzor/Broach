@@ -14,7 +14,6 @@ namespace Broach
 {
     public class SpriteComponent : GameComponent
     {
-        private Node parent;
         private Texture2D texture;
         private Rectangle renderRect;
         private bool isVisible;
@@ -29,12 +28,10 @@ namespace Broach
         /// <summary>
         /// creates a sprite component, this draws the given texture at the supposed rectangle
         /// </summary>
-        /// <param name="parent"> node which owns this component </param>
         /// <param name="tex"> texture which will be drawn</param>
         /// <param name="r"> where it will be drawm, and how large it will be drawn</param>
         public SpriteComponent(Node parent, Texture2D tex, Rectangle r)
         {
-            this.parent = parent;
             texture = tex;
             renderRect = r;
             isVisible = true;

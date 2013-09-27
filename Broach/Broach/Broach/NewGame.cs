@@ -27,9 +27,13 @@ namespace Broach
             nodes.Add(mainMenuButton);
         }
 
+        public override void onEnter()
+        {
+            Console.WriteLine("Entered the newgame scene");
+        }
         public void mainMenuButtonclicked()
         {
-            SceneManager.handleMainMenu(Content);
+            SceneFactory.getMainMenu(Content);
         }
     }
 }

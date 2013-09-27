@@ -112,7 +112,7 @@
   <ItemGroup>
     <Compile Include="Button.cs" />
     <Compile Include="ClickEventComponent.cs" />
-    <Compile Include="ClickSystem.cs" />
+    <Compile Include="ClickEventSystem.cs" />
     <Compile Include="Continue.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -122,7 +122,6 @@
     </Compile>
     <Compile Include="GameComponent.cs" />
     <Compile Include="InputHandler.cs" />
-    <Compile Include="Interface1.cs" />
     <Compile Include="Label.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Node.cs" />
@@ -130,8 +129,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Scene.cs" />
-    <Compile Include="SceneManager.cs" />
+    <Compile Include="SceneFactory.cs" />
     <Compile Include="NewGame.cs" />
+    <Compile Include="SceneSystem.cs" />
     <Compile Include="SpriteComponent.cs" />
     <Compile Include="SpriteSystem.cs" />
   </ItemGroup>
