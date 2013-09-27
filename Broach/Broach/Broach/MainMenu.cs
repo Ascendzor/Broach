@@ -30,6 +30,9 @@ namespace Broach
 
             Node exitButton = new Button(this, new Vector2(300, 300), Content.Load<Texture2D>("Exit"), exitButtonClicked);
             nodes.Add(exitButton);
+
+            HackerConsole console = new HackerConsole();
+            nodes.Add(console);
         }
 
         public override void onEnter()

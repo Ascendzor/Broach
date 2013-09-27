@@ -19,14 +19,12 @@ namespace Broach
         public List<ClickEventComponent> ClickEvents
         {
             get { return clickers; }
-            set { clickers = value; }
         }
         public void Update()
         {
             foreach (ClickEventComponent click in clickers)
             {
                 MouseState mouse = Mouse.GetState();
-                Console.Out.WriteLine("updating clicky event");
                 if (mouse.LeftButton == ButtonState.Pressed)
                 {
                     if (mouse.X > click.Target.X && mouse.X < click.Target.X + click.Target.Width)

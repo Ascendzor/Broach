@@ -28,6 +28,10 @@ namespace Broach
         // scene aspect updates the scene after any other updates have happened
         public static SceneSystem SceneController;
 
+        // keyupsys
+        public static OnKeyUpSystem KeyUpSystem;
+
+        public static ScriptSystem Scripts;
 
         public Game1()
         {
@@ -40,9 +44,13 @@ namespace Broach
             ((Form)Form.FromHandle(this.Window.Handle)).Cursor = System.Windows.Forms.Cursors.Cross;
 
             IsMouseVisible = true;
+
             SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice));
             SceneController = new SceneSystem();
             ClickSystem = new ClickEventSystem();
+            KeyUpSystem = new OnKeyUpSystem();
+            Scripts = new ScriptSystem();
+
             SceneController.Handle(SceneFactory.getMainMenu(Content));
 
             base.Initialize();
@@ -50,7 +58,9 @@ namespace Broach
 
         protected override void Update(GameTime gameTime)
         {
+            Scripts.Update(gameTime);
             ClickSystem.Update();
+            KeyUpSystem.Update();
             SceneController.Update();
             base.Update(gameTime);
         }
