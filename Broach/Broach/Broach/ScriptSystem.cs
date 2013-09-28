@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
-    public class ScriptSystem
+    public class ScriptSystem : GameSystem
     {
         private List<ScriptComponent> scripts;
 
@@ -26,7 +26,7 @@ namespace Broach
             scripts = new List<ScriptComponent>();
         }
 
-        public void Update(GameTime dt)
+        public override void Update(GameTime dt)
         {
             foreach (var item in scripts)
             {
@@ -34,7 +34,7 @@ namespace Broach
             }
         }
 
-        public void Clear() {
+        public override void Clear() {
             scripts = new List<ScriptComponent>();
         }
         

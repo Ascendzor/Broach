@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
-    public class ClickEventSystem
+    public class ClickEventSystem : GameSystem
     {
         private List<ClickEventComponent> clickers = new List<ClickEventComponent>();
 
@@ -20,7 +20,8 @@ namespace Broach
         {
             get { return clickers; }
         }
-        public void Update()
+
+        public override void Update(GameTime gameTime)
         {
             foreach (ClickEventComponent click in clickers)
             {
@@ -42,7 +43,7 @@ namespace Broach
         /// <summary>
         /// Clear up the click events before dispatching the next scene
         /// </summary>
-        public void Clear()
+        public override void Clear()
         {
             clickers = new List<ClickEventComponent>();
         }

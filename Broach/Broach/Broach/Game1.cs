@@ -19,19 +19,22 @@ namespace Broach
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
+
+        // list to easily iterate through all systems
+        public static List<GameSystem> Systems = new List<GameSystem>();
+
+        // scene aspect updates the scene after any other updates have happened
+        public static SceneSystem SceneController;
+
         // renderer aspect
         public static SpriteSystem SpriteRenderer;
 
         // click event aspect
         public static ClickEventSystem ClickSystem;
 
-        // scene aspect updates the scene after any other updates have happened
-        public static SceneSystem SceneController;
-
-        // keyupsys
         public static OnKeyUpSystem KeyUpSystem;
 
-        public static ScriptSystem Scripts;
+        public static ScriptSystem scriptSystem;
 
         public Game1()
         {
@@ -45,12 +48,12 @@ namespace Broach
 
             IsMouseVisible = true;
 
-            SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice));
-            SceneController = new SceneSystem();
-            ClickSystem = new ClickEventSystem();
-            KeyUpSystem = new OnKeyUpSystem();
-            Scripts = new ScriptSystem();
+            Systems.Add(SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice)));
+            Systems.Add(ClickSystem = new ClickEventSystem());
+            Systems.Add(KeyUpSystem = new OnKeyUpSystem());
+            Systems.Add(scriptSystem = new ScriptSystem());
 
+            SceneController = new SceneSystem();
             SceneController.Handle(SceneFactory.getMainMenu(Content));
 
             base.Initialize();
@@ -58,17 +61,21 @@ namespace Broach
 
         protected override void Update(GameTime gameTime)
         {
-            Scripts.Update(gameTime);
-            ClickSystem.Update();
-            KeyUpSystem.Update();
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            foreach (GameSystem system in Systems)
+            {
+                system.Update(gameTime);
+            }
             SceneController.Update();
+
             base.Update(gameTime);
         }
 
+
+        //potentially made irrelevant
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            SpriteRenderer.Draw();
             base.Draw(gameTime);
         }
     }

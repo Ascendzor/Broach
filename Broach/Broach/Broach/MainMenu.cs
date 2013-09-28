@@ -39,6 +39,7 @@ namespace Broach
         {
             Console.WriteLine("Loaded the Main Menu scene");
         }
+
         public void newGameButtonClicked()
         {
             Game1.SceneController.Handle(SceneFactory.getNewGame(Content));

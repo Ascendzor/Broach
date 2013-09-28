@@ -121,6 +121,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GameComponent.cs" />
+    <Compile Include="GameSystem.cs" />
     <Compile Include="HackerConsole.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="Label.cs" />

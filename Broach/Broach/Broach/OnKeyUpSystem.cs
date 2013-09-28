@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
-    public class OnKeyUpSystem
+    public class OnKeyUpSystem : GameSystem
     {
         private List<OnKeyUpComponent> onKeyUpComponents;
 
@@ -29,7 +29,7 @@ namespace Broach
             get { return onKeyUpComponents; }
         }
 
-        public void Update()
+        public override void Update(GameTime gameTime)
         {
             foreach (OnKeyUpComponent item in onKeyUpComponents)
             {
@@ -49,7 +49,7 @@ namespace Broach
                 }
             }
         }
-        public void Clear()
+        public override void Clear()
         {
             onKeyUpComponents = new List<OnKeyUpComponent>();
         }

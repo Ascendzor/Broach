@@ -16,9 +16,10 @@ namespace Broach
         
         private static void prepSceneForDispatch() 
         {
-            Game1.SpriteRenderer.Clear();
-            Game1.KeyUpSystem.Clear();
-            Game1.ClickSystem.Clear();
+            foreach (GameSystem system in Game1.Systems)
+            {
+                system.Clear();
+            }
         }
         public static Scene getNewGame(ContentManager Content)
         {

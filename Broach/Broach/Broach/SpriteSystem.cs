@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
-    public class SpriteSystem
+    public class SpriteSystem : GameSystem
     {
         private SpriteBatch batch;
 
@@ -39,8 +39,8 @@ namespace Broach
             get { return sprites; }
             set { sprites = value; }
         }
-        
-        public void Draw()
+
+        public override void Update(GameTime gameTime)
         {
             batch.Begin();
             foreach (SpriteComponent item in sprites)
@@ -53,7 +53,7 @@ namespace Broach
         /// <summary>
         /// clears all components, nothing will be rendered
         /// </summary>
-        public void Clear()
+        public override void Clear()
         {
             sprites = new List<SpriteComponent>();
         }
