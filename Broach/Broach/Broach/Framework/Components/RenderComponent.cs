@@ -12,15 +12,23 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
-    public class SpriteComponent : GameComponent
+    public class RenderComponent : GameComponent
     {
-        private Texture2D texture;
-        private Rectangle renderRect;
         private bool isVisible;
+        private Action<SpriteBatch> draw;
+
+        public Action<SpriteBatch> Draw
+        {
+            get { return draw; }
+            set { draw = value; }
+        }
+        
 
         public bool IsVisisble
         {
-            get { return isVisible; }
+            get {
+                return isVisible;
+            }
             set { isVisible = value; }
         }
         
@@ -30,21 +38,11 @@ namespace Broach
         /// </summary>
         /// <param name="tex"> texture which will be drawn</param>
         /// <param name="r"> where it will be drawm, and how large it will be drawn</param>
-        public SpriteComponent(Node parent, Texture2D tex, Rectangle r)
+        public RenderComponent()
         {
-            texture = tex;
-            renderRect = r;
             isVisible = true;
-
             // add oneself to the SpriteSystem.
-            Game1.SpriteRenderer.Sprites.Add(this);
-        }
-        public void Draw(SpriteBatch b)
-        {
-            if (isVisible)
-            {
-                b.Draw(texture, renderRect, Color.White);
-            }
+            Game1.Render.Sprites.Add(this);
         }
     }
 }

@@ -27,14 +27,16 @@ namespace Broach
         public static SceneSystem SceneController;
 
         // renderer aspect
-        public static SpriteSystem SpriteRenderer;
+        public static RenderSystem Render;
 
         // click event aspect
         public static ClickEventSystem ClickSystem;
 
         public static OnKeyUpSystem KeyUpSystem;
 
-        public static ScriptSystem scriptSystem;
+        public static ScriptSystem ScriptSystem;
+
+        public static SpriteBatch Batch;
 
         public Game1()
         {
@@ -46,12 +48,14 @@ namespace Broach
         {
             ((Form)Form.FromHandle(this.Window.Handle)).Cursor = System.Windows.Forms.Cursors.Cross;
 
+            Batch = new SpriteBatch(GraphicsDevice);
+
             IsMouseVisible = true;
 
-            Systems.Add(SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice)));
+            Systems.Add(Render = new RenderSystem());
             Systems.Add(ClickSystem = new ClickEventSystem());
             Systems.Add(KeyUpSystem = new OnKeyUpSystem());
-            Systems.Add(scriptSystem = new ScriptSystem());
+            Systems.Add(ScriptSystem = new ScriptSystem());
 
             SceneController = new SceneSystem();
             SceneController.Handle(SceneFactory.getMainMenu(Content));
@@ -70,13 +74,6 @@ namespace Broach
             SceneController.Update();
 
             base.Update(gameTime);
-        }
-
-
-        //potentially made irrelevant
-        protected override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
         }
     }
 }

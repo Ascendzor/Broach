@@ -13,12 +13,16 @@ using Microsoft.Xna.Framework.Media;
 namespace Broach
 {
 
-    public class ScriptComponent
+    public class ScriptComponent : GameComponent
     {
         private Action<GameTime, object> updateFn;
 
         private object data;
 
+        public ScriptComponent()
+        {
+            Game1.ScriptSystem.Scripts.Add(this);
+        }
         /// <summary>
         /// The data context which is passed into updateFn
         /// </summary>
