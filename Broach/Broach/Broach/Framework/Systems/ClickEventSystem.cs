@@ -39,6 +39,11 @@ namespace Broach
                 }   
             }
         }
+
+        public override void AddComponent(GameComponent component)
+        {
+            clickers.Add((ClickEventComponent)component);
+        }
  
         /// <summary>
         /// Clear up the click events before dispatching the next scene

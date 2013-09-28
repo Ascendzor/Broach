@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Broach
 {
-    public class SceneSystem
+    public class SceneController
     {
         private Scene activeScene;
         private Scene nextScene;

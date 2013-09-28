@@ -20,9 +20,9 @@ namespace Broach
         /// spritesystem is the subsystem of a game which draws EVEERY single 2d texture in the game.
         /// </summary>
         /// <param name="batch"></param>
-        public RenderSystem()
+        public RenderSystem(SpriteBatch b)
         {
-            batch = Game1.Batch;
+            batch = b;
             sprites = new List<RenderComponent>();
         }
 
@@ -57,3 +57,4 @@ namespace Broach
         }
     }
 }
+

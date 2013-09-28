@@ -42,7 +42,14 @@ namespace Broach
         {
             isVisible = true;
             // add oneself to the SpriteSystem.
-            Game1.Render.Sprites.Add(this);
+            Game1.Systems["Sprite"].AddComponent(this);
+        }
+        public void Draw(SpriteBatch b)
+        {
+            if (isVisible)
+            {
+                b.Draw(texture, renderRect, Color.White);
+            }
         }
     }
 }

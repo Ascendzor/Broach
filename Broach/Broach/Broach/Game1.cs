@@ -13,6 +13,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Reflection;
+using System.Collections;
 
 namespace Broach
 {
@@ -21,22 +22,10 @@ namespace Broach
         GraphicsDeviceManager graphics;
 
         // list to easily iterate through all systems
-        public static List<GameSystem> Systems = new List<GameSystem>();
+        public static Dictionary<string, GameSystem> Systems;
 
         // scene aspect updates the scene after any other updates have happened
-        public static SceneSystem SceneController;
-
-        // renderer aspect
-        public static RenderSystem Render;
-
-        // click event aspect
-        public static ClickEventSystem ClickSystem;
-
-        public static OnKeyUpSystem KeyUpSystem;
-
-        public static ScriptSystem ScriptSystem;
-
-        public static SpriteBatch Batch;
+        public static SceneController SceneController;
 
         public Game1()
         {
@@ -48,16 +37,15 @@ namespace Broach
         {
             ((Form)Form.FromHandle(this.Window.Handle)).Cursor = System.Windows.Forms.Cursors.Cross;
 
-            Batch = new SpriteBatch(GraphicsDevice);
-
             IsMouseVisible = true;
 
-            Systems.Add(Render = new RenderSystem());
-            Systems.Add(ClickSystem = new ClickEventSystem());
-            Systems.Add(KeyUpSystem = new OnKeyUpSystem());
-            Systems.Add(ScriptSystem = new ScriptSystem());
+            Systems = new Dictionary<string, GameSystem>();
+            Systems.Add("Sprite", new RenderSystem(new SpriteBatch(GraphicsDevice)));
+            Systems.Add("ClickEvent", new ClickEventSystem());
+            Systems.Add("OnKeyUp", new OnKeyUpSystem());
+            Systems.Add("Script", new ScriptSystem());
 
-            SceneController = new SceneSystem();
+            SceneController = new SceneController();
             SceneController.Handle(SceneFactory.getMainMenu(Content));
 
             base.Initialize();
@@ -67,13 +55,20 @@ namespace Broach
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            foreach (GameSystem system in Systems)
+            foreach (string system in Systems.Keys)
             {
-                system.Update(gameTime);
+                Systems[system].Update(gameTime);
             }
             SceneController.Update();
 
             base.Update(gameTime);
+        }
+
+
+        //potentially made irrelevant
+        protected override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
         }
     }
 }

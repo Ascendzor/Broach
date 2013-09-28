@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
@@ -20,5 +20,7 @@ namespace Broach
         public abstract void Update(GameTime gameTime);
 
         public abstract void Clear();
+
+        public abstract void AddComponent(GameComponent component);
     }
 }
