@@ -54,33 +54,30 @@ namespace Broach
             Components.Add(activator);
 
             // What other components need to be made?
-            // Draw background
-            Texture2D tex  = Content.Load<Texture2D>("bg");
-            RenderComponent background = new RenderComponent()
-            {
-                Draw = (SpriteBatch batch) =>
-                {
-                    batch.Draw(tex, new Rectangle(100,0,tex.Bounds.Width,tex.Bounds.Height),Color.White);
-                }
-            };
-            Components.Add(background);
+            
             // animate background into vision
 
             // Draw text
             // Its a hacker console so this will be a hacker solution :)
             // draw text through a scriptComponent
 
+            // Draw background
+            Texture2D tex  = Content.Load<Texture2D>("bg");
             consoleData = "Bro@ch > ";
             inputTextPosition = new Vector2(110, 177);
             font = Content.Load<SpriteFont>("SpriteFont1");
-            RenderComponent textInput = new RenderComponent()
+            RenderComponent visibleStuff = new RenderComponent()
             {
                 Draw = (SpriteBatch batch) =>
                 {
-                    batch.DrawString(font, consoleData, inputTextPosition, Color.White);
+                    if ((bool)isActive.Data)
+                    {
+                        batch.Draw(tex, new Rectangle(100,0,tex.Bounds.Width,tex.Bounds.Height),Color.White);
+                        batch.DrawString(font, consoleData, inputTextPosition, Color.White);
+                    }
                 }
             };
-            Components.Add(textInput);
+            Components.Add(visibleStuff);
 
         }
     }
