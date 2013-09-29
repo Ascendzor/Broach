@@ -83,15 +83,5 @@ namespace Broach
             Components.Add(textInput);
 
         }
-
-        private void drawTextContent(GameTime dt, object data) {
-            String content = (string)data;
-            //spritebatch reference... 
-            // this is ineffcient but fuck it...
-            Game1.Batch.Begin();
-            Game1.Batch.DrawString(font, content, inputTextPosition,Color.Wheat);
-            Game1.Batch.End();
-
-        }
     }
 }

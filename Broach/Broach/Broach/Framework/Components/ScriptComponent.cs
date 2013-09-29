@@ -21,7 +21,7 @@ namespace Broach
 
         public ScriptComponent()
         {
-            Game1.ScriptSystem.Scripts.Add(this);
+            Game1.Systems["ScriptSystem"].Components.Add(this);
         }
         /// <summary>
         /// The data context which is passed into updateFn

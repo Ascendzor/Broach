@@ -14,24 +14,9 @@ namespace Broach
 {
     public class OnKeyUpSystem : GameSystem
     {
-        private List<OnKeyUpComponent> onKeyUpComponents;
-
-        public OnKeyUpSystem()
-        {
-            onKeyUpComponents = new List<OnKeyUpComponent>();
-        }
-
-        /// <summary>
-        /// All the current keyup events being updated
-        /// </summary>
-        public List<OnKeyUpComponent> KeyUpEvents
-        {
-            get { return onKeyUpComponents; }
-        }
-
         public override void Update(GameTime gameTime)
         {
-            foreach (OnKeyUpComponent item in onKeyUpComponents)
+            foreach (OnKeyUpComponent item in Components)
             {
                 KeyboardState curr = Keyboard.GetState();
                 KeyState currentKeyState = curr.IsKeyDown(item.ActivationKey) ? KeyState.Down: KeyState.Up;
@@ -48,10 +33,6 @@ namespace Broach
                     item.PreviousKeyState = currentKeyState;
                 }
             }
-        }
-        public override void Clear()
-        {
-            onKeyUpComponents = new List<OnKeyUpComponent>();
         }
     }
 }

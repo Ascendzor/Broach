@@ -18,7 +18,7 @@ namespace Broach
         private Keys activeKey;
 
         public OnKeyUpComponent() {
-            Game1.Systems["OnKeyUp"].AddComponent(this);
+            Game1.Systems["OnKeyUp"].Components.Add(this);
         }
         /// <summary>
         /// The key that will activate Onclick when it is lifted

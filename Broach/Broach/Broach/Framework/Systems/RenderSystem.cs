@@ -15,6 +15,7 @@ namespace Broach
     public class RenderSystem : GameSystem
     {
         private SpriteBatch batch;
+        private List<RenderComponent> sprites;
 
         /// <summary>
         /// spritesystem is the subsystem of a game which draws EVEERY single 2d texture in the game.
@@ -23,16 +24,6 @@ namespace Broach
         public RenderSystem(SpriteBatch b)
         {
             batch = b;
-            sprites = new List<RenderComponent>();
-        }
-
-
-        private List<RenderComponent> sprites;
-
-        public List<RenderComponent> Sprites
-        {
-            get { return sprites; }
-            set { sprites = value; }
         }
 
         public override void Update(GameTime gameTime)
@@ -48,13 +39,6 @@ namespace Broach
             batch.End();
         }
 
-        /// <summary>
-        /// clears all components, nothing will be rendered
-        /// </summary>
-        public override void Clear()
-        {
-            sprites = new List<RenderComponent>();
-        }
     }
 }
 

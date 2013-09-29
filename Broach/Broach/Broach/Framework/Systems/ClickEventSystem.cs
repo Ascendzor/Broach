@@ -14,16 +14,9 @@ namespace Broach
 {
     public class ClickEventSystem : GameSystem
     {
-        private List<ClickEventComponent> clickers = new List<ClickEventComponent>();
-
-        public List<ClickEventComponent> ClickEvents
-        {
-            get { return clickers; }
-        }
-
         public override void Update(GameTime gameTime)
         {
-            foreach (ClickEventComponent click in clickers)
+            foreach (ClickEventComponent click in Components)
             {
                 MouseState mouse = Mouse.GetState();
                 if (mouse.LeftButton == ButtonState.Pressed)
@@ -39,19 +32,5 @@ namespace Broach
                 }   
             }
         }
-
-        public override void AddComponent(GameComponent component)
-        {
-            clickers.Add((ClickEventComponent)component);
-        }
- 
-        /// <summary>
-        /// Clear up the click events before dispatching the next scene
-        /// </summary>
-        public override void Clear()
-        {
-            clickers = new List<ClickEventComponent>();
-        }
-        
     }
 }

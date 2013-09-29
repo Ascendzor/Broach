@@ -17,10 +17,22 @@ namespace Broach
 {
     public abstract class GameSystem
     {
+        private List<GameComponent> components = new List<GameComponent>();
+
+        public List<GameComponent> Components
+        {
+            get { return components; }
+            set { components = value; }
+        }
+        
         public abstract void Update(GameTime gameTime);
 
-        public abstract void Clear();
-
-        public abstract void AddComponent(GameComponent component);
+        /// <summary>
+        /// Clears the set of components the system currently updates
+        /// </summary>
+        public void Clear()
+        {
+            components = new List<GameComponent>();
+        }
     }
 }

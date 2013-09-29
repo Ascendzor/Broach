@@ -135,7 +135,7 @@
     <Compile Include="Framework\Scene.cs" />
     <Compile Include="Framework\SceneFactory.cs" />
     <Compile Include="Scenes\NewGame.cs" />
-    <Compile Include="Framework\Systems\SceneSystem.cs" />
+    <Compile Include="Framework\SceneController.cs" />
     <Compile Include="Framework\Components\ScriptComponent.cs" />
     <Compile Include="Framework\Systems\ScriptSystem.cs" />
     <Compile Include="Framework\Components\RenderComponent.cs" />

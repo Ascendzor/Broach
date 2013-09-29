@@ -40,7 +40,7 @@ namespace Broach
             IsMouseVisible = true;
 
             Systems = new Dictionary<string, GameSystem>();
-            Systems.Add("Sprite", new RenderSystem(new SpriteBatch(GraphicsDevice)));
+            Systems.Add("Render", new RenderSystem(new SpriteBatch(GraphicsDevice)));
             Systems.Add("ClickEvent", new ClickEventSystem());
             Systems.Add("OnKeyUp", new OnKeyUpSystem());
             Systems.Add("Script", new ScriptSystem());
