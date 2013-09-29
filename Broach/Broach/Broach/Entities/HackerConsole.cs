@@ -18,11 +18,10 @@ namespace Broach
     class HackerConsole : Node
     {
 
+        // Note, its not good to store state in a node
         SpriteFont font;
         Vector2 inputTextPosition;
         String consoleData;
-
-
         
         public HackerConsole(ContentManager Content)
         {
@@ -79,6 +78,27 @@ namespace Broach
             };
             Components.Add(visibleStuff);
 
+            // make events for each keypress to get keyboard input
+            foreach (Keys key in Enum.GetValues(typeof(Keys)))
+            {
+                // tilde reserved for toggling the console
+                if (key != Keys.OemTilde)
+                {
+                    // binding for opening the console
+                    OnKeyUpComponent key_listener = new OnKeyUpComponent()
+                    {
+                        ActivationKey = key,
+                        OnClick = () => {
+                            if ((bool)isActive.Data)
+                            {
+                                consoleData += key.ToString();
+                            }
+                        }
+                    };
+                    Components.Add(key_listener);
+                }
+                
+            }
         }
     }
 }
