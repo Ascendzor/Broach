@@ -20,5 +20,7 @@ namespace Broach
         public abstract void Update(GameTime gameTime);
 
         public abstract void Clear();
+
+        public abstract void AddComponent(GameComponent component);
     }
 }

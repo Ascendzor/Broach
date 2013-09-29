@@ -13,12 +13,11 @@ namespace Broach
 {
     public class SceneFactory
     {
-        
         private static void prepSceneForDispatch() 
         {
-            foreach (GameSystem system in Game1.Systems)
+            foreach (string key in Game1.Systems.Keys)
             {
-                system.Clear();
+                Game1.Systems[key].Clear();
             }
         }
         public static Scene getNewGame(ContentManager Content)

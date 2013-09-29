@@ -44,7 +44,7 @@ namespace Broach
             this.target = target;
 
             // add self to the clicksystem aspect
-            Game1.ClickSystem.ClickEvents.Add(this);
+            Game1.Systems["ClickEvent"].AddComponent(this);
         }
     }
 }

@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework.Media;
 namespace Broach
 {
 
-    public class ScriptComponent
+    public class ScriptComponent : GameComponent
     {
         private Action<GameTime, object> updateFn;
 

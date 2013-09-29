@@ -34,6 +34,11 @@ namespace Broach
             }
         }
 
+        public override void AddComponent(GameComponent component)
+        {
+            scripts.Add((ScriptComponent)component);
+        }
+
         public override void Clear() {
             scripts = new List<ScriptComponent>();
         }

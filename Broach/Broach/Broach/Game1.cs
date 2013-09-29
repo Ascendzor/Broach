@@ -13,6 +13,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Reflection;
+using System.Collections;
 
 namespace Broach
 {
@@ -21,20 +22,10 @@ namespace Broach
         GraphicsDeviceManager graphics;
 
         // list to easily iterate through all systems
-        public static List<GameSystem> Systems = new List<GameSystem>();
+        public static Dictionary<string, GameSystem> Systems;
 
         // scene aspect updates the scene after any other updates have happened
         public static SceneSystem SceneController;
-
-        // renderer aspect
-        public static SpriteSystem SpriteRenderer;
-
-        // click event aspect
-        public static ClickEventSystem ClickSystem;
-
-        public static OnKeyUpSystem KeyUpSystem;
-
-        public static ScriptSystem scriptSystem;
 
         public Game1()
         {
@@ -48,10 +39,11 @@ namespace Broach
 
             IsMouseVisible = true;
 
-            Systems.Add(SpriteRenderer = new SpriteSystem(new SpriteBatch(GraphicsDevice)));
-            Systems.Add(ClickSystem = new ClickEventSystem());
-            Systems.Add(KeyUpSystem = new OnKeyUpSystem());
-            Systems.Add(scriptSystem = new ScriptSystem());
+            Systems = new Dictionary<string, GameSystem>();
+            Systems.Add("Sprite", new SpriteSystem(new SpriteBatch(GraphicsDevice)));
+            Systems.Add("ClickEvent", new ClickEventSystem());
+            Systems.Add("OnKeyUp", new OnKeyUpSystem());
+            Systems.Add("Script", new ScriptSystem());
 
             SceneController = new SceneSystem();
             SceneController.Handle(SceneFactory.getMainMenu(Content));
@@ -63,9 +55,9 @@ namespace Broach
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            foreach (GameSystem system in Systems)
+            foreach (string system in Systems.Keys)
             {
-                system.Update(gameTime);
+                Systems[system].Update(gameTime);
             }
             SceneController.Update();
 

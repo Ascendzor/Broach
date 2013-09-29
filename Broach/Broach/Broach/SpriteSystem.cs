@@ -50,6 +50,11 @@ namespace Broach
             batch.End();
         }
 
+        public override void AddComponent(GameComponent component)
+        {
+            sprites.Add((SpriteComponent)component);
+        }
+
         /// <summary>
         /// clears all components, nothing will be rendered
         /// </summary>

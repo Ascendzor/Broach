@@ -49,6 +49,12 @@ namespace Broach
                 }
             }
         }
+
+        public override void AddComponent(GameComponent component)
+        {
+            KeyUpEvents.Add((OnKeyUpComponent)component);
+        }
+
         public override void Clear()
         {
             onKeyUpComponents = new List<OnKeyUpComponent>();
