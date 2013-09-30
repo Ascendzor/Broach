@@ -12,6 +12,13 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
+    enum ConsoleState
+    {
+        Down,
+        Up,
+        GoingDown,
+        GoingUp
+    }
     /// <summary>
     /// The hacker console is yr typical drop down console which allows interaction with the system
     /// </summary>
@@ -19,35 +26,71 @@ namespace Broach
     {
 
         // Note, its not good to store state in a node
+        // State stored in a node won't be accessable by components
         SpriteFont font;
-        Vector2 inputTextPosition;
-        String consoleData;
         
         public HackerConsole(ContentManager Content)
         {
 
-            ScriptComponent isActive = new ScriptComponent()
+            // State that will be accessble through hackerconsoles script component
+            Dictionary<String, object> hackerstate = new Dictionary<string,object>()
             {
-                Data = false,
-                UpdateAction = (GameTime dt, object data) => {}
+                {"consolePosition", new Vector2(110, -200)},
+                {"consoleText", "Bro@ch >"},
+                {"state", ConsoleState.Up},
             };
-            Components.Add(isActive);
+
+            ScriptComponent hackerConsoleState = new ScriptComponent()
+            {
+                Data = hackerstate,
+                UpdateAction = (GameTime dt, object state) => {
+                    Dictionary<String, object> s = (Dictionary<String, object>)state;
+                    Vector2 position = (Vector2)s["consolePosition"];
+                    Vector2 criticalValue = new Vector2(110,177);
+
+                    float speed = 10f;
+                    ConsoleState console = (ConsoleState)s["state"];
+                    switch (console)
+                    {
+                        case ConsoleState.GoingDown:
+                            position.Y = position.Y + speed;
+                            if (position.Y > 0)
+                            {
+                                console = ConsoleState.Down;
+                            }
+                            break;
+                        case ConsoleState.GoingUp:
+                            position.Y = position.Y - speed;
+                            if (position.Y < -200 )
+                            {
+                                console = ConsoleState.Up;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    s["consolePosition"] = position;
+                    s["state"] = console;
+                }
+            };
+            Components.Add(hackerConsoleState);
+            
 
             // binding for opening the console
             OnKeyUpComponent activator = new OnKeyUpComponent()
             {
                 ActivationKey = Keys.OemTilde,
                 OnClick = () => {
-                    if ((bool)isActive.Data)
+                    ConsoleState s = (ConsoleState)hackerstate["state"];
+                    if (s == ConsoleState.Up)
                     {
-                        Console.Out.WriteLine("Toggled off!");
-                        isActive.Data = false;
+                        s = ConsoleState.GoingDown;
                     }
-                    else
+                    else if (s == ConsoleState.Down)
                     {
-                        Console.Out.WriteLine("Toggled on!");
-                        isActive.Data = true;
+                        s = ConsoleState.GoingUp;
                     }
+                    hackerstate["state"] = s;
                 }
             };
             Components.Add(activator);
@@ -62,22 +105,23 @@ namespace Broach
 
             // Draw background
             Texture2D tex  = Content.Load<Texture2D>("bg");
-            consoleData = "Bro@ch > ";
-            inputTextPosition = new Vector2(110, 177);
             font = Content.Load<SpriteFont>("SpriteFont1");
+
             RenderComponent visibleStuff = new RenderComponent()
             {
                 Draw = (SpriteBatch batch) =>
                 {
-                    if ((bool)isActive.Data)
-                    {
-                        batch.Draw(tex, new Rectangle(100,0,tex.Bounds.Width,tex.Bounds.Height),Color.White);
-                        batch.DrawString(font, consoleData, inputTextPosition, Color.White);
-                    }
+                    ConsoleState s = (ConsoleState)hackerstate["state"];
+                    Vector2 p = (Vector2)hackerstate["consolePosition"];
+                    Vector2 textPosition = p + new Vector2(0,177);
+                    Rectangle renderRect = new Rectangle((int)p.X, (int)p.Y, tex.Bounds.Width, tex.Bounds.Height);
+                    batch.Draw(tex, renderRect, Color.White);
+                    batch.DrawString(font, (string)hackerstate["consoleText"], (Vector2) hackerstate["consolePosition"], Color.White);
                 }
             };
             Components.Add(visibleStuff);
 
+            /*
             // make events for each keypress to get keyboard input
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {
@@ -89,7 +133,7 @@ namespace Broach
                     {
                         ActivationKey = key,
                         OnClick = () => {
-                            if ((bool)isActive.Data)
+                            if ((bool)hackerstate["isActive"])
                             {
                                 consoleData += key.ToString();
                             }
@@ -97,8 +141,8 @@ namespace Broach
                     };
                     Components.Add(key_listener);
                 }
-                
             }
+            */
         }
     }
 }
