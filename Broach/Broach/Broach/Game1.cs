@@ -36,7 +36,6 @@ namespace Broach
         protected override void Initialize()
         {
             ((Form)Form.FromHandle(this.Window.Handle)).Cursor = System.Windows.Forms.Cursors.Cross;
-
             IsMouseVisible = true;
 
             Systems = new Dictionary<string, GameSystem>();
