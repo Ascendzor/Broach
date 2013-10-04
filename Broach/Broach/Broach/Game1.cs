@@ -45,7 +45,7 @@ namespace Broach
             Systems.Add("Script", new ScriptSystem());
 
             SceneController = new SceneController();
-            SceneController.Handle(SceneFactory.getMainMenu(Content));
+            SceneController.Handle(SceneFactory.getMainMenu(Content, this));
 
             base.Initialize();
         }
@@ -61,13 +61,6 @@ namespace Broach
             SceneController.Update();
 
             base.Update(gameTime);
-        }
-
-
-        //potentially made irrelevant
-        protected override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
         }
     }
 }

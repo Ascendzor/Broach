@@ -49,28 +49,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Continue.png">
-      <Name>Continue</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Exit.png">
-      <Name>Exit</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ContinueLabel.png">
-      <Name>ContinueLabel</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="MainMenuLabel.png">
-      <Name>MainMenuLabel</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="NewGameLabel.png">
       <Name>NewGameLabel</Name>
       <Importer>TextureImporter</Importer>
@@ -86,8 +64,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bg.png">
-      <Name>bg</Name>
+    <Compile Include="rocktex.png">
+      <Name>rocktex</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="hmap.png">
+      <Name>hmap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

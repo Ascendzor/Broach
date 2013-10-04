@@ -16,6 +16,5 @@ namespace Broach
     {
         protected List<Node> nodes;
 
-        public abstract void onEnter();
     }
 }
