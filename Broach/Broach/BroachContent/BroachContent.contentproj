@@ -64,15 +64,36 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="rocktex.png">
-      <Name>rocktex</Name>
+    <Compile Include="gradmap.png">
+      <Name>gradmap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="hmap.png">
-      <Name>hmap</Name>
+    <Compile Include="grasstexture.jpg">
+      <Name>grasstexture</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="sampleterrain1.png">
+      <Name>sampleterrain1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="volcanos.png">
+      <Name>volcanos</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="oceantex.png">
+      <Name>oceantex</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

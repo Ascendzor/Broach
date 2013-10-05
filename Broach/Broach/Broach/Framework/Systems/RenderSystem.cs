@@ -10,34 +10,52 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
 namespace Broach
 {
-    public class RenderSystem : GameSystem
+    /// <summary>
+    /// RenderSystem is for 3d drawing
+    /// </summary>
+    class RenderSystem: GameSystem
     {
-        private SpriteBatch batch;
+        private BasicEffect material;
+        private Game1 game;
 
-        /// <summary>
-        /// spritesystem is the subsystem of a game which draws EVEERY single 2d texture in the game.
-        /// </summary>
-        /// <param name="batch"></param>
-        public RenderSystem(SpriteBatch b)
+        public BasicEffect Material
         {
-            batch = b;
+            get { return material; }
+            set { material = value; }
         }
 
+        public RenderSystem(Game1 g)
+        {
+            game = g;
+            material = new BasicEffect(g.GraphicsDevice);
+            material.EnableDefaultLighting();
+            material.TextureEnabled = true;
+        }
         public override void Update(GameTime gameTime)
         {
-            batch.Begin();
+            game.GraphicsDevice.BlendState = BlendState.Opaque;
+            game.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+            game.GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+
+
             foreach (RenderComponent item in Components)
             {
-                if (item.IsVisisble)
+                // set render state items
+
+                material.Texture = item.Texture;
+                material.World = Matrix.Identity;
+                material.View = item.Camera.View;
+                material.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, game.GraphicsDevice.Viewport.AspectRatio, 1, 1000);
+
+                foreach (EffectPass pass in material.CurrentTechnique.Passes)
                 {
-                    item.Draw(batch);
+                    pass.Apply();
+                    game.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, item.Vertices, 0, item.Vertices.Length / 3);
                 }
             }
-            batch.End();
         }
-
     }
 }
-

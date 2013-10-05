@@ -17,28 +17,55 @@ namespace Broach
 
         const int rows = 255, cols = 255;
         VertexPositionNormalTexture[] vertices;
-        BasicEffect material;
+        VertexPositionNormalTexture[] oceanVerts;
+
         Texture2D groundcover;
+        Texture2D oceantex;
+
         float[,] heights;
+        float oceanheight = 14f;
+
         Camera cam = new Camera()
         {
             Position = new Vector3(100,0,100)
         };
-        
+
 
         public TerrainScene(ContentManager Content, Game1 game)
         {
             game.IsMouseVisible = false;
 
-            vertices = new VertexPositionNormalTexture[255 * 255 * 2 * 3];
-            groundcover = Content.Load<Texture2D>("rocktex");
-            material = new BasicEffect(game.GraphicsDevice);
-            material.EnableDefaultLighting();
-            material.TextureEnabled = true;
-            material.Texture = groundcover;
+            // setting up verticies and normals for
+            oceantex = Content.Load<Texture2D>("oceantex");
+            oceanVerts = new VertexPositionNormalTexture[4 * 2 * 3];
 
+            oceanVerts[0].Position = new Vector3(0, oceanheight, 255);
+            oceanVerts[0].Normal = new Vector3(0, 1, 0);
+            oceanVerts[0].TextureCoordinate = new Vector2(0, 0);
+            oceanVerts[1].Position = new Vector3(0, oceanheight, 0);
+            oceanVerts[1].Normal = new Vector3(0, 1, 0);
+            oceanVerts[1].TextureCoordinate = new Vector2(0, 1);
+            oceanVerts[2].Position = new Vector3(255, oceanheight, 0);
+            oceanVerts[2].Normal = new Vector3(0, 1, 0);
+            oceanVerts[2].TextureCoordinate = new Vector2(1, 1);
+
+            oceanVerts[3].Position = new Vector3(0, oceanheight, 255);
+            oceanVerts[3].Normal = new Vector3(0, 1, 0);
+            oceanVerts[3].TextureCoordinate = new Vector2(0, 0);
+            oceanVerts[4].Position = new Vector3(255, oceanheight, 0);
+            oceanVerts[4].Normal = new Vector3(0, 1, 0);
+            oceanVerts[4].TextureCoordinate = new Vector2(1, 1);
+            oceanVerts[5].Position = new Vector3(255, oceanheight, 255);
+            oceanVerts[5].Normal = new Vector3(0, 1, 0);
+            oceanVerts[5].TextureCoordinate = new Vector2(1, 0);
+
+
+            // setting up verticies and normals for terrain
+            vertices = new VertexPositionNormalTexture[255 * 255 * 2 * 3];
+
+            groundcover = Content.Load<Texture2D>("grasstexture");
             #region get height data
-            Texture2D heighttexture = Content.Load<Texture2D>("hmap");
+            Texture2D heighttexture = Content.Load<Texture2D>("gradmap");
             Color[] heightdata = new Color[256 * 256];
             heighttexture.GetData<Color>(heightdata);
 
@@ -47,7 +74,7 @@ namespace Broach
             {
                 for (int c = 0; c < cols; c++)
                 {
-                    heights[r, c] = (heightdata[r * 256 + c].G - 128) / 4.0f;
+                    heights[r, c] = (heightdata[r * 256 + c].G ) / 4.0f;
                 }
             }
             #endregion
@@ -130,38 +157,30 @@ namespace Broach
             }
             #endregion
 
-
-            // render terrain
-            ScriptComponent  renderTerrain = new ScriptComponent()
+            RenderComponent renderOcean = new RenderComponent()
             {
-                UpdateAction = (GameTime dt, object data) =>
-                {
-                    
-                    game.GraphicsDevice.BlendState = BlendState.Opaque;
-                    game.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
-
-                    material.World = Matrix.Identity;
-                    material.View = cam.View;
-                    material.Projection = Matrix.CreatePerspectiveFieldOfView(
-                        MathHelper.PiOver2, game.GraphicsDevice.Viewport.AspectRatio, 1, 1000);
-
-                    foreach (EffectPass pass in material.CurrentTechnique.Passes)
-                    {
-                        pass.Apply();
-                        game.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList,
-                            vertices, 0, vertices.Length / 3);
-                    }
-                },
+                Camera = cam,
+                Vertices = oceanVerts,
+                Texture = oceantex
             };
+            // render terrain, see RenderSystem for the implementation and drawuserprimitives call
+            RenderComponent terrain = new RenderComponent()
+            {
+                Camera = cam,
+                Vertices = vertices,
+                Texture = groundcover,
+            };
+
+
+            
 
             // render 2d textures
-            RenderComponent instructionsLabel = new RenderComponent()
+            SpriteComponent instructionsLabel = new SpriteComponent()
             {
                 Draw = (SpriteBatch b) => {
-                    b.DrawString(Content.Load<SpriteFont>("SpriteFont1"), "Press esc to return to main menu\n" + cam.ToString(), new Vector2(0, 0), Color.Bisque);
+                    b.DrawString(Content.Load<SpriteFont>("SpriteFont1"), cam.ToString(), new Vector2(0, 0), Color.Bisque);
                 },
             };
-
             
             // event listener for escape key
             OnKeyUpComponent returnToMenu = new OnKeyUpComponent()
@@ -169,7 +188,7 @@ namespace Broach
                 ActivationKey = Keys.Escape,
                 OnClick = () =>
                 {
-                    Game1.SceneController.Handle(SceneFactory.getMainMenu(Content, game));
+                    game.Exit();
                 }
             };
 

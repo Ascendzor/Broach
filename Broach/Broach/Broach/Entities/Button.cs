@@ -17,7 +17,7 @@ namespace Broach
         {
             // Add the Sprite component
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-            RenderComponent buttonSprite = new RenderComponent()
+            SpriteComponent buttonSprite = new SpriteComponent()
             {
                 Draw = (SpriteBatch batch) =>
                 {

@@ -27,13 +27,5 @@ namespace Broach
             Scene scene = new TerrainScene(Content, game);
             return scene;
         }
-
-        public static Scene getMainMenu(ContentManager Content, Game1 game)
-        {
-            prepSceneForDispatch();
-            Scene scene = new MainMenu(Content, game);
-            return scene; 
-        }
-
     }
 }

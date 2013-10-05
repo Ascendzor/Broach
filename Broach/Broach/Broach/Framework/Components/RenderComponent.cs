@@ -12,36 +12,34 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
-    public class RenderComponent : GameComponent
+    class RenderComponent : GameComponent
     {
-        private bool isVisible;
-        private Action<SpriteBatch> draw;
 
-        public Action<SpriteBatch> Draw
+        private VertexPositionNormalTexture[] vertices;
+        private Texture2D texture;
+
+        private Camera camera;
+
+        public Camera Camera
         {
-            get { return draw; }
-            set { draw = value; }
+            get { return camera; }
+            set { camera = value; }
         }
         
-
-        public bool IsVisisble
+        public VertexPositionNormalTexture[] Vertices
         {
-            get {
-                return isVisible;
-            }
-            set { isVisible = value; }
+            get { return vertices; }
+            set { vertices = value; }
+        }
+
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
         }
         
-
-        /// <summary>
-        /// creates a sprite component, this draws the given texture at the supposed rectangle
-        /// </summary>
-        /// <param name="tex"> texture which will be drawn</param>
-        /// <param name="r"> where it will be drawm, and how large it will be drawn</param>
         public RenderComponent()
         {
-            isVisible = true;
-            // add oneself to the SpriteSystem.
             Game1.Systems["Render"].Components.Add(this);
         }
     }

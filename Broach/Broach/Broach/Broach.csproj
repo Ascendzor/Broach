@@ -124,10 +124,11 @@
     <Compile Include="Entities\HackerConsole.cs" />
     <Compile Include="Framework\InputHandler.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="Scenes\MainMenu.cs" />
     <Compile Include="Framework\Node.cs" />
     <Compile Include="Framework\Components\OnKeyUpComponent.cs" />
     <Compile Include="Framework\Systems\OnKeyUpSystem.cs" />
+    <Compile Include="Framework\Components\RenderComponent.cs" />
+    <Compile Include="Framework\Systems\RenderSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
@@ -136,8 +137,8 @@
     <Compile Include="Framework\SceneController.cs" />
     <Compile Include="Framework\Components\ScriptComponent.cs" />
     <Compile Include="Framework\Systems\ScriptSystem.cs" />
-    <Compile Include="Framework\Components\RenderComponent.cs" />
-    <Compile Include="Framework\Systems\RenderSystem.cs" />
+    <Compile Include="Framework\Components\SpriteComponent.cs" />
+    <Compile Include="Framework\Systems\SpriteSystem.cs" />
     <Compile Include="Scenes\TerrainScene.cs" />
   </ItemGroup>
   <ItemGroup>

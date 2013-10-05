@@ -39,13 +39,14 @@ namespace Broach
             IsMouseVisible = true;
 
             Systems = new Dictionary<string, GameSystem>();
-            Systems.Add("Render", new RenderSystem(new SpriteBatch(GraphicsDevice)));
             Systems.Add("ClickEvent", new ClickEventSystem());
             Systems.Add("OnKeyUp", new OnKeyUpSystem());
             Systems.Add("Script", new ScriptSystem());
+            Systems.Add("Render", new RenderSystem(this));
+            Systems.Add("Sprite", new SpriteSystem(new SpriteBatch(GraphicsDevice)));
 
             SceneController = new SceneController();
-            SceneController.Handle(SceneFactory.getMainMenu(Content, this));
+            SceneController.Handle(SceneFactory.getNewGame(Content, this));
 
             base.Initialize();
         }

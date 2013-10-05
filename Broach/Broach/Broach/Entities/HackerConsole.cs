@@ -404,7 +404,7 @@ namespace Broach
             Texture2D tex  = Content.Load<Texture2D>("bg");
             font = Content.Load<SpriteFont>("SpriteFont1");
 
-            RenderComponent visibleStuff = new RenderComponent()
+            SpriteComponent visibleStuff = new SpriteComponent()
             {
                 Draw = (SpriteBatch batch) =>
                 {
