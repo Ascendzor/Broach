@@ -213,8 +213,11 @@ namespace Broach
 
                     }
 
-                    Vector3 forward = Vector3.Transform(new Vector3(0,0,-1), Matrix.CreateRotationX(cam.Direction.Elevation) * Matrix.CreateRotationY(cam.Direction.Bearing));
+                    Vector3 forward = Vector3.Transform(new Vector3(0,0,-1), Matrix.CreateRotationY(cam.Direction.Bearing));
                     Vector3 right = Vector3.Cross(forward, Vector3.Up);
+
+                    Vector3 moveVector = new Vector3(0,0,0);
+
                     if (Keyboard.GetState().IsKeyDown(Keys.W))
                         cam.Position += forward * moveRate;
                     if (Keyboard.GetState().IsKeyDown(Keys.A))
