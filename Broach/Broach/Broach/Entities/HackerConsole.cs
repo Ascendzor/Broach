@@ -83,6 +83,7 @@ namespace Broach
                                     Keys someKey = allPressed[i];
                                     switch (someKey)
                                     {
+                                        #region keys
                                         case Keys.Add:
                                             break;
                                         case Keys.Apps:
@@ -359,6 +360,7 @@ namespace Broach
                                             }
                                             s["consoleText"] += chr;
                                             break;
+                                        #endregion
                                     }
                                 }
                             }
