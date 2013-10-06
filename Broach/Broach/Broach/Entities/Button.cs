@@ -13,7 +13,7 @@ namespace Broach
 {
     class Button : Node
     {
-        public Button(object parent, Vector2 position, Texture2D texture, Action clickAction)
+        public Button(Vector2 position, Texture2D texture, Action clickAction)
         {
             // Add the Sprite component
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);

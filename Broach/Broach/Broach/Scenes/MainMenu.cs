@@ -19,16 +19,16 @@ namespace Broach
             this.Content = Content;
             nodes = new List<Node>();
 
-            Node menuLabel = new Label(this, new Vector2(20, 20), Content.Load<Texture2D>("MainMenuLabel"));
+            Node menuLabel = new Label(new Vector2(20, 20), Content.Load<Texture2D>("MainMenuLabel"));
             nodes.Add(menuLabel);
 
-            Node newGameButton = new Button(this, new Vector2(100, 100), Content.Load<Texture2D>("NewGame"), newGameButtonClicked);
+            Node newGameButton = new Button(new Vector2(100, 100), Content.Load<Texture2D>("NewGame"), newGameButtonClicked);
             nodes.Add(newGameButton);
 
-            Node continueButton = new Button(this, new Vector2(500, 100), Content.Load<Texture2D>("Continue"), continueButtonClicked);
+            Node continueButton = new Button(new Vector2(500, 100), Content.Load<Texture2D>("Continue"), continueButtonClicked);
             nodes.Add(continueButton);
 
-            Node exitButton = new Button(this, new Vector2(300, 300), Content.Load<Texture2D>("Exit"), exitButtonClicked);
+            Node exitButton = new Button(new Vector2(300, 300), Content.Load<Texture2D>("Exit"), exitButtonClicked);
             nodes.Add(exitButton);
 
             HackerConsole console = new HackerConsole(Content);

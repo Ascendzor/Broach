@@ -13,7 +13,7 @@ namespace Broach
 {
     class Label : Node
     {
-        public Label(object parent, Vector2 position, Texture2D texture)
+        public Label(Vector2 position, Texture2D texture)
         {
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
             RenderComponent buttonSprite = new RenderComponent()

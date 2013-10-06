@@ -20,10 +20,10 @@ namespace Broach
             this.Content = Content;
             nodes = new List<Node>();
 
-            Node menuLabel = new Label(this, new Vector2(20, 20), Content.Load<Texture2D>("ContinueLabel"));
+            Node menuLabel = new Label(new Vector2(20, 20), Content.Load<Texture2D>("ContinueLabel"));
             nodes.Add(menuLabel);
 
-            Button mainMenuButton = new Button(this, new Vector2(100, 400), Content.Load <Texture2D>("MainMenuLabel"), mainMenuButtonclicked);
+            Button mainMenuButton = new Button(new Vector2(100, 400), Content.Load <Texture2D>("MainMenuLabel"), mainMenuButtonclicked);
             nodes.Add(mainMenuButton);
         }
 
