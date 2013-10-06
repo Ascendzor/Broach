@@ -157,10 +157,12 @@ namespace Broach
             }
             #endregion
 
+
             RenderComponent renderOcean = new RenderComponent()
             {
                 Camera = cam,
                 Vertices = oceanVerts,
+                TranslationMatrix = Matrix.Identity,
                 Texture = oceantex
             };
             // render terrain, see RenderSystem for the implementation and drawuserprimitives call
@@ -170,8 +172,6 @@ namespace Broach
                 Vertices = vertices,
                 Texture = groundcover,
             };
-
-
             
 
             // render 2d textures
@@ -196,6 +196,7 @@ namespace Broach
             MouseState referencePosition = Mouse.GetState();
             float speed = 0.01f;
             float moveRate = 0.5f;
+            float jmpHeight = 5f;
 
             ScriptComponent updateCamera = new ScriptComponent()
             {
@@ -219,19 +220,50 @@ namespace Broach
                     Vector3 moveVector = new Vector3(0,0,0);
 
                     if (Keyboard.GetState().IsKeyDown(Keys.W))
-                        cam.Position += forward * moveRate;
+                        moveVector += forward * moveRate;
                     if (Keyboard.GetState().IsKeyDown(Keys.A))
-                        cam.Position -= right * moveRate;
+                        moveVector -= right * moveRate;
                     if (Keyboard.GetState().IsKeyDown(Keys.D))
-                        cam.Position += right * moveRate;
+                        moveVector += right * moveRate;
                     if (Keyboard.GetState().IsKeyDown(Keys.S))
-                        cam.Position -= forward * moveRate;
+                        moveVector -= forward * moveRate;
 
-                    cam.Position = new Vector3(cam.Position.X, heights[(int)cam.Position.X, (int)cam.Position.Z] + 5, cam.Position.Z);
+                    
+                    Vector3 lower = new Vector3(cam.Position.X, heights[ (int)cam.Position.X, (int)cam.Position.Z] + jmpHeight, cam.Position.Z);
+                    Vector3 upper = new Vector3(cam.Position.X, heights[(int)cam.Position.X + 1, (int)cam.Position.Z + 1] + jmpHeight, cam.Position.Z);
+
+                    Vector3 next = moveVector + lower;
+                    next.Y = MathHelper.Lerp(lower.Y, upper.Y, 0.0001f );
+                    moveVector.Y = next.Y;
+                    cam.Position = next;
                 }
             };
 
-            
+                        // controls the waterlevel for tide
+            bool goingUp = true;
+            ScriptComponent tide = new ScriptComponent()
+            {
+                UpdateAction = (GameTime dt, object data) =>
+                {
+                    if (goingUp)
+                    {
+                        oceanheight += 0.05f;
+                        if (oceanheight > 25)
+                        {
+                            goingUp = false;
+                        }
+                    }
+                    else
+                    {
+                        oceanheight -= 0.05f;
+                        if (oceanheight < 0)
+                        {
+                            goingUp = true;
+                        }
+                    }
+                    renderOcean.TranslationMatrix = Matrix.CreateTranslation(0, oceanheight, 0);
+                },
+            };
         }
     }
 }

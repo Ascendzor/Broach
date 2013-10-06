@@ -46,7 +46,7 @@ namespace Broach
                 // set render state items
 
                 material.Texture = item.Texture;
-                material.World = Matrix.Identity;
+                material.World = item.TranslationMatrix;
                 material.View = item.Camera.View;
                 material.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver2, game.GraphicsDevice.Viewport.AspectRatio, 1, 1000);
 

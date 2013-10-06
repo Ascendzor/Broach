@@ -20,6 +20,14 @@ namespace Broach
 
         private Camera camera;
 
+        private Matrix translation;
+
+        public Matrix TranslationMatrix
+        {
+            get { return translation; }
+            set { translation = value; }
+        }
+        
         public Camera Camera
         {
             get { return camera; }
@@ -40,6 +48,7 @@ namespace Broach
         
         public RenderComponent()
         {
+            translation = Matrix.Identity;
             Game1.Systems["Render"].Components.Add(this);
         }
     }
