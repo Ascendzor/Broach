@@ -35,30 +35,32 @@ namespace Broach
         {
             game.IsMouseVisible = false;
 
-            // setting up verticies and normals for
+            #region setting up verticies and normals for
             oceantex = Content.Load<Texture2D>("oceantex");
             oceanVerts = new VertexPositionNormalTexture[4 * 2 * 3];
 
-            oceanVerts[0].Position = new Vector3(0, oceanheight, 255);
+            int size= 2500;
+            oceanVerts[0].Position = new Vector3(-size, oceanheight, size);
             oceanVerts[0].Normal = new Vector3(0, 1, 0);
             oceanVerts[0].TextureCoordinate = new Vector2(0, 0);
-            oceanVerts[1].Position = new Vector3(0, oceanheight, 0);
+            oceanVerts[1].Position = new Vector3(-size, oceanheight, -size);
             oceanVerts[1].Normal = new Vector3(0, 1, 0);
             oceanVerts[1].TextureCoordinate = new Vector2(0, 1);
-            oceanVerts[2].Position = new Vector3(255, oceanheight, 0);
+            oceanVerts[2].Position = new Vector3(size, oceanheight, -size);
             oceanVerts[2].Normal = new Vector3(0, 1, 0);
             oceanVerts[2].TextureCoordinate = new Vector2(1, 1);
 
-            oceanVerts[3].Position = new Vector3(0, oceanheight, 255);
+            oceanVerts[3].Position = new Vector3(-size, oceanheight, size);
             oceanVerts[3].Normal = new Vector3(0, 1, 0);
             oceanVerts[3].TextureCoordinate = new Vector2(0, 0);
-            oceanVerts[4].Position = new Vector3(255, oceanheight, 0);
+            oceanVerts[4].Position = new Vector3(size, oceanheight, -size);
             oceanVerts[4].Normal = new Vector3(0, 1, 0);
             oceanVerts[4].TextureCoordinate = new Vector2(1, 1);
-            oceanVerts[5].Position = new Vector3(255, oceanheight, 255);
+            oceanVerts[5].Position = new Vector3(size, oceanheight, size);
             oceanVerts[5].Normal = new Vector3(0, 1, 0);
             oceanVerts[5].TextureCoordinate = new Vector2(1, 0);
 
+            #endregion
 
             // setting up verticies and normals for terrain
             vertices = new VertexPositionNormalTexture[255 * 255 * 2 * 3];
@@ -192,16 +194,23 @@ namespace Broach
                 }
             };
 
-            // Setup camera move inputs
+            // Setup camera move state stuff
             MouseState referencePosition = Mouse.GetState();
             float speed = 0.01f;
             float moveRate = 0.5f;
-            float jmpHeight = 5f;
+            float camHeight = 5f;
 
             ScriptComponent updateCamera = new ScriptComponent()
             {
                 UpdateAction = (GameTime dt, object d) =>
                 {
+                    if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) || Keyboard.GetState().IsKeyDown(Keys.RightControl))
+                    {
+                        camHeight = 1f;
+                    }
+                    else
+                        camHeight = 5f;
+
                     MouseState currentMouseState = Mouse.GetState();
                     if (referencePosition != currentMouseState)
                     {
@@ -217,29 +226,68 @@ namespace Broach
                     Vector3 forward = Vector3.Transform(new Vector3(0,0,-1), Matrix.CreateRotationY(cam.Direction.Bearing));
                     Vector3 right = Vector3.Cross(forward, Vector3.Up);
 
-                    Vector3 moveVector = new Vector3(0,0,0);
+                    Vector3 flatmoveVector = new Vector3(0,0,0);
 
                     if (Keyboard.GetState().IsKeyDown(Keys.W))
-                        moveVector += forward * moveRate;
+                        flatmoveVector += forward * moveRate;
                     if (Keyboard.GetState().IsKeyDown(Keys.A))
-                        moveVector -= right * moveRate;
+                        flatmoveVector -= right * moveRate;
                     if (Keyboard.GetState().IsKeyDown(Keys.D))
-                        moveVector += right * moveRate;
+                        flatmoveVector += right * moveRate;
                     if (Keyboard.GetState().IsKeyDown(Keys.S))
-                        moveVector -= forward * moveRate;
+                        flatmoveVector -= forward * moveRate;
 
-                    
-                    Vector3 lower = new Vector3(cam.Position.X, heights[ (int)cam.Position.X, (int)cam.Position.Z] + jmpHeight, cam.Position.Z);
-                    Vector3 upper = new Vector3(cam.Position.X, heights[(int)cam.Position.X + 1, (int)cam.Position.Z + 1] + jmpHeight, cam.Position.Z);
+
+                    #region colide into maps edge
+                    int xIndex;
+                    int yIndex;
+                    if (cam.Position.X > 254)
+                    {
+                        xIndex = 254;
+                        cam.Position = new Vector3(xIndex, cam.Position.Y, cam.Position.Z);
+                    }
+                    else if (cam.Position.X < 0)
+                    {
+                        xIndex = 0;
+                        cam.Position = new Vector3(xIndex, cam.Position.Y, cam.Position.Z);
+                    }
+                    else
+                        xIndex = (int)cam.Position.X;
+
+                    if (cam.Position.Z > 254)
+                    {
+                        yIndex = 254;
+                        cam.Position = new Vector3(cam.Position.X, cam.Position.Y, yIndex);
+                    }
+                    else if (cam.Position.Z < 0 )
+                    {
+                        yIndex = 0;
+                        cam.Position = new Vector3(cam.Position.X, cam.Position.Y, yIndex);
+                    }
+
+                    else
+                        yIndex = (int)cam.Position.Z;
+
+                    #endregion
+
+
+                    #region lerp between map coords
+                    Vector3 moveVector = new Vector3(flatmoveVector.X, flatmoveVector.Y, flatmoveVector.Z);
+
+                    Vector3 lower = new Vector3(cam.Position.X, heights[ xIndex , yIndex] + camHeight, cam.Position.Z);
+                    Vector3 upper = new Vector3(cam.Position.X, heights[xIndex + 1, yIndex + 1] + camHeight, cam.Position.Z);
 
                     Vector3 next = moveVector + lower;
-                    next.Y = MathHelper.Lerp(lower.Y, upper.Y, 0.0001f );
+                    next.Y = MathHelper.Lerp(lower.Y, upper.Y, moveRate );
                     moveVector.Y = next.Y;
+                    #endregion
+
                     cam.Position = next;
                 }
             };
 
-                        // controls the waterlevel for tide
+            #region setup tide
+            // controls the waterlevel for tide
             bool goingUp = true;
             ScriptComponent tide = new ScriptComponent()
             {
@@ -264,6 +312,7 @@ namespace Broach
                     renderOcean.TranslationMatrix = Matrix.CreateTranslation(0, oceanheight, 0);
                 },
             };
+            #endregion
         }
     }
 }
