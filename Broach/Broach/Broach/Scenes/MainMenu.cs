@@ -17,22 +17,12 @@ namespace Broach
         public MainMenu(ContentManager Content)
         {
             this.Content = Content;
-            nodes = new List<Node>();
 
-            Node menuLabel = new Label(new Vector2(20, 20), Content.Load<Texture2D>("MainMenuLabel"));
-            nodes.Add(menuLabel);
+
 
             Node newGameButton = new Button(new Vector2(100, 100), Content.Load<Texture2D>("NewGame"), newGameButtonClicked);
             nodes.Add(newGameButton);
 
-            Node continueButton = new Button(new Vector2(500, 100), Content.Load<Texture2D>("Continue"), continueButtonClicked);
-            nodes.Add(continueButton);
-
-            Node exitButton = new Button(new Vector2(300, 300), Content.Load<Texture2D>("Exit"), exitButtonClicked);
-            nodes.Add(exitButton);
-
-            HackerConsole console = new HackerConsole(Content);
-            nodes.Add(console);
         }
 
         public override void onEnter()
@@ -42,17 +32,6 @@ namespace Broach
 
         public void newGameButtonClicked()
         {
-            Game1.SceneController.Handle(SceneFactory.getNewGame(Content));
-        }
-
-        public void continueButtonClicked()
-        {
-            Game1.SceneController.Handle(SceneFactory.getContinueScene(Content));
-        }
-
-        public void exitButtonClicked()
-        {
-            Console.WriteLine("exit");
         }
     }
 }

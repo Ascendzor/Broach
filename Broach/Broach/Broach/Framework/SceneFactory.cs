@@ -21,24 +21,10 @@ namespace Broach
                 Game1.Systems[key].Clear();
             }
         }
-        public static Scene getNewGame(ContentManager Content)
+        public static Scene getNewGame(ContentManager Content, Game1 game)
         {
             prepSceneForDispatch();
-            Scene scene = new NewGame(Content);
-            return scene;
-        }
-
-        public static Scene getMainMenu(ContentManager Content)
-        {
-            prepSceneForDispatch();
-            Scene scene = new MainMenu(Content);
-            return scene; 
-        }
-
-        public static Scene getContinueScene(ContentManager Content)
-        {
-            prepSceneForDispatch();
-            Scene scene = new Continue(Content);
+            Scene scene = new GameScene(Content, game);
             return scene;
         }
     }

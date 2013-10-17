@@ -30,11 +30,14 @@ namespace Broach
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferHeight = 200;
+            graphics.PreferredBackBufferWidth = 1000;
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
+
             ((Form)Form.FromHandle(this.Window.Handle)).Cursor = System.Windows.Forms.Cursors.Cross;
             IsMouseVisible = true;
 
@@ -45,7 +48,7 @@ namespace Broach
             Systems.Add("Script", new ScriptSystem());
 
             SceneController = new SceneController();
-            SceneController.Handle(SceneFactory.getMainMenu(Content));
+            SceneController.Handle(SceneFactory.getNewGame(Content, this));
 
             base.Initialize();
         }
