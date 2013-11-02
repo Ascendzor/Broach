@@ -10,9 +10,5 @@ namespace Broach
     /// </summary>
     public abstract class GameComponent
     {
-        public GameComponent()
-        {
-
-        }
     }
 }

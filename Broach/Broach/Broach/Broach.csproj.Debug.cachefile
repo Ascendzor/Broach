@@ -1,10 +1,10 @@
 Content\NewGame.xnb
+Content\NewGameLabel.xnb
+Content\SpriteFont1.xnb
 Content\Continue.xnb
 Content\Exit.xnb
 Content\ContinueLabel.xnb
 Content\MainMenuLabel.xnb
-Content\NewGameLabel.xnb
 Content\bg.xnb
-Content\SpriteFont1.xnb
 Content\paddle.xnb
 Content\pong_bg.xnb

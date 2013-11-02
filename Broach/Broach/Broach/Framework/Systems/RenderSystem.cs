@@ -28,12 +28,9 @@ namespace Broach
         public override void Update(GameTime gameTime)
         {
             batch.Begin();
-            foreach (RenderComponent item in Components)
+            foreach (GenericRenderComponent item in Components)
             {
-                if (item.IsVisisble)
-                {
-                    item.Draw(batch);
-                }
+                item.Draw(batch);
             }
             batch.End();
         }

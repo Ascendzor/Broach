@@ -16,15 +16,12 @@ namespace Broach
     {
         public Player(Game1 game, Vector2 position)
         {
+
+            PositionComponent paddle = new PositionComponent(position);
+            this.Components.Add(paddle);
+
             Texture2D paddleTexture = game.Content.Load<Texture2D>("paddle");
-            Rectangle renderRect = new Rectangle((int)position.X, (int)position.Y, paddleTexture.Width, paddleTexture.Height);
-            RenderComponent paddleDrawer = new RenderComponent()
-            {
-                Draw = (SpriteBatch batch) =>
-                {
-                    batch.Draw(paddleTexture, renderRect, Color.White);
-                },
-            };
+            RenderComponent paddleDrawer = new RenderComponent(paddleTexture, paddle);
             this.Components.Add(paddleDrawer);
         }
     }

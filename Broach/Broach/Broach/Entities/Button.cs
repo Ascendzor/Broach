@@ -17,13 +17,9 @@ namespace Broach
         {
             // Add the Sprite component
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-            RenderComponent buttonSprite = new RenderComponent()
-            {
-                Draw = (SpriteBatch batch) =>
-                {
-                    batch.Draw(texture, buttonSize, Color.White);
-                }
-            };
+            PositionComponent pc = new PositionComponent(position);
+            Components.Add(pc);
+            RenderComponent buttonSprite = new RenderComponent(texture, pc);
             Components.Add(buttonSprite);
 
             // add the click component

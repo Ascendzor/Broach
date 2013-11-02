@@ -18,13 +18,8 @@ namespace Broach
         {
             Texture2D wallsTexture = game.Content.Load<Texture2D>("pong_bg");
             Rectangle renderRect = new Rectangle(0, 0, wallsTexture.Width, wallsTexture.Height);
-            RenderComponent paddleDrawer = new RenderComponent()
-            {
-                Draw = (SpriteBatch batch) =>
-                {
-                    batch.Draw(wallsTexture, renderRect, Color.White);
-                },
-            };
+            PositionComponent pc = new PositionComponent(new Vector2(0,0));
+            RenderComponent paddleDrawer = new RenderComponent(wallsTexture, pc);
             this.Components.Add(paddleDrawer);
                 
             

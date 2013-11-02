@@ -16,13 +16,8 @@ namespace Broach
         public Label(Vector2 position, Texture2D texture)
         {
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-            RenderComponent buttonSprite = new RenderComponent()
-            {
-                Draw = (SpriteBatch batch) =>
-                {
-                    batch.Draw(texture, position, Color.White);
-                }
-            };
+            PositionComponent pc = new PositionComponent(position);
+            RenderComponent buttonSprite = new RenderComponent(texture,pc );
             Components.Add(buttonSprite);
         }
     }

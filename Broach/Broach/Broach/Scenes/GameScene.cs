@@ -17,16 +17,56 @@ namespace Broach
         public GameScene(ContentManager content, Game1 game)
         {
             Walls bg = new Walls(game);
+
             Player me = new Player(game, new Vector2(10,100));
+            float velocity = 10;
+            OnKeyUpComponent moveup = new OnKeyUpComponent(){
+                ActivationKey = Keys.A,
+                OnClick = () => {
+                    foreach (var item in me.Components)
+                    {
+                        if (item is PositionComponent)
+                        {
+                            PositionComponent c = (PositionComponent)item;
+                            c.Position = new Vector2(c.Position.X, c.Position.Y - velocity);
+                        }
+                    }
+                },
+            };
+            me.Components.Add(moveup);
+            OnKeyUpComponent moveDown = new OnKeyUpComponent(){
+                ActivationKey = Keys.Z,
+                OnClick = () => {
+                    foreach (var item in me.Components)
+                    {
+                        if (item is PositionComponent)
+                        {
+                            PositionComponent c = (PositionComponent)item;
+                            c.Position = new Vector2(c.Position.X, c.Position.Y + velocity);
+                        }
+                    }
+                },
+            };
+            me.Components.Add(moveDown);
+            
             // make me respond to mouse input
-            me.Components.Add(new ScriptComponent()
+            Player you = new Player(game, new Vector2(game.GraphicsDevice.Viewport.Width - 13 - 10, 100));
+            you.Components.Add(new ScriptComponent()
             {
                 UpdateAction = (GameTime dt, object data) => 
                 {
                     MouseState mouse = Mouse.GetState();
+                    foreach (var item in you.Components)
+                    {
+                        if (item is PositionComponent)
+                        {
+                            PositionComponent c = (PositionComponent)item;
+                            c.Position = new Vector2(c.Position.X, mouse.Y);
+                            
+                        }
+                    }
                 }
             });
-            Player you = new Player(game, new Vector2(game.GraphicsDevice.Viewport.Width - 13 - 10, 100));
         }
         public override void onEnter()
         {
