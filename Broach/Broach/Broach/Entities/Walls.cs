@@ -20,9 +20,8 @@ namespace Broach
             Rectangle renderRect = new Rectangle(0, 0, wallsTexture.Width, wallsTexture.Height);
             PositionComponent pc = new PositionComponent(new Vector2(0,0));
             RenderComponent paddleDrawer = new RenderComponent(wallsTexture, pc);
-            this.Components.Add(paddleDrawer);
-                
-            
+            this.Components.Add("PositionComponent", pc);
+            this.Components.Add("RenderComponent", paddleDrawer);
         }
     }
 }

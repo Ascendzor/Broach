@@ -19,52 +19,36 @@ namespace Broach
             Walls bg = new Walls(game);
 
             Player me = new Player(game, new Vector2(10,100));
-            float velocity = 10;
-            OnKeyUpComponent moveup = new OnKeyUpComponent(){
-                ActivationKey = Keys.A,
-                OnClick = () => {
-                    foreach (var item in me.Components)
-                    {
-                        if (item is PositionComponent)
-                        {
-                            PositionComponent c = (PositionComponent)item;
-                            c.Position = new Vector2(c.Position.X, c.Position.Y - velocity);
-                        }
-                    }
-                },
+            float velocity = 20;
+
+            Dictionary<Keys, Action> keysToActions = new Dictionary<Keys, Action>();
+            Action aKey = () =>
+            {
+                Vector2 myPosition = ((PositionComponent)me.Components["PositionComponent"]).Position;
+                ((PositionComponent)me.Components["PositionComponent"]).Position = new Vector2(myPosition.X, myPosition.Y - velocity);
             };
-            me.Components.Add(moveup);
-            OnKeyUpComponent moveDown = new OnKeyUpComponent(){
-                ActivationKey = Keys.Z,
-                OnClick = () => {
-                    foreach (var item in me.Components)
-                    {
-                        if (item is PositionComponent)
-                        {
-                            PositionComponent c = (PositionComponent)item;
-                            c.Position = new Vector2(c.Position.X, c.Position.Y + velocity);
-                        }
-                    }
-                },
+
+            Action zKey = () =>
+            {
+                Vector2 myPosition = ((PositionComponent)me.Components["PositionComponent"]).Position;
+                ((PositionComponent)me.Components["PositionComponent"]).Position = new Vector2(myPosition.X, myPosition.Y + velocity);
             };
-            me.Components.Add(moveDown);
+
+            keysToActions.Add(Keys.A, aKey);
+            keysToActions.Add(Keys.Z, zKey);
+
+            OnKeyUpComponent onKeysUp = new OnKeyUpComponent(keysToActions);
+            me.Components.Add("OnKeyUpComponent", onKeysUp);
             
             // make me respond to mouse input
             Player you = new Player(game, new Vector2(game.GraphicsDevice.Viewport.Width - 13 - 10, 100));
-            you.Components.Add(new ScriptComponent()
+            you.Components.Add("ScriptComponent", new ScriptComponent()
             {
                 UpdateAction = (GameTime dt, object data) => 
                 {
                     MouseState mouse = Mouse.GetState();
-                    foreach (var item in you.Components)
-                    {
-                        if (item is PositionComponent)
-                        {
-                            PositionComponent c = (PositionComponent)item;
-                            c.Position = new Vector2(c.Position.X, mouse.Y);
-                            
-                        }
-                    }
+                    Vector2 myPosition = ((PositionComponent)you.Components["PositionComponent"]).Position;
+                    ((PositionComponent)you.Components["PositionComponent"]).Position = new Vector2(myPosition.X, mouse.Y);
                 }
             });
         }

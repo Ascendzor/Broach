@@ -16,13 +16,14 @@ namespace Broach
     {
         public Player(Game1 game, Vector2 position)
         {
-
             PositionComponent paddle = new PositionComponent(position);
-            this.Components.Add(paddle);
+
+            this.Components.Add("PositionComponent", paddle);
 
             Texture2D paddleTexture = game.Content.Load<Texture2D>("paddle");
             RenderComponent paddleDrawer = new RenderComponent(paddleTexture, paddle);
-            this.Components.Add(paddleDrawer);
+
+            this.Components.Add("RenderComponent", paddleDrawer);
         }
     }
 }

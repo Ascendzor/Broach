@@ -13,38 +13,34 @@ namespace Broach
 {
     public class OnKeyUpComponent : GameComponent
     {
-        private KeyState? previousState;
-        private Action onClick;
-        private Keys activeKey;
+        private Dictionary<Keys, KeyState?> previousStates;
+        private Dictionary<Keys, Action> keyActionMap;
 
-        public OnKeyUpComponent() {
+        public OnKeyUpComponent(Dictionary<Keys, Action> keyActionMap) {
             Game1.Systems["OnKeyUp"].Components.Add(this);
+
+            this.keyActionMap = keyActionMap;
+
+            this.previousStates = new Dictionary<Keys, KeyState?>();
+            foreach (Keys leKey in keyActionMap.Keys)
+            {
+                this.previousStates.Add(leKey, null);
+            }
         }
-        /// <summary>
-        /// The key that will activate Onclick when it is lifted
-        /// </summary>
-        public Keys ActivationKey
+
+        public Dictionary<Keys, Action> KeyActionMap
         {
-            get { return activeKey; }
-            set { activeKey = value; }
-        }
-        
-        /// <summary>
-        /// this is a void returning method, that is called when the key is lifted
-        /// </summary>
-        public Action OnClick
-        {
-            get { return onClick; }
-            set { onClick = value; }
+            get { return keyActionMap; }
+            set { keyActionMap = value; }
         }
         
         /// <summary>
         /// active key state
         /// </summary>
-        public KeyState? PreviousKeyState
+        public Dictionary<Keys, KeyState?> PreviousKeyStates
         {
-            get { return previousState; }
-            set { previousState = value; }
+            get { return previousStates; }
+            set { previousStates = value; }
         }
     }
 }

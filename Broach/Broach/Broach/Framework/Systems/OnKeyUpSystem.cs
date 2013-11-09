@@ -16,21 +16,26 @@ namespace Broach
     {
         public override void Update(GameTime gameTime)
         {
+            KeyboardState current = Keyboard.GetState();
+                        
             foreach (OnKeyUpComponent item in Components)
             {
-                KeyboardState curr = Keyboard.GetState();
-                KeyState currentKeyState = curr.IsKeyDown(item.ActivationKey) ? KeyState.Down: KeyState.Up;
-
-                // if we have no previous state it is not possible for the key to be activated, set previous and gtfo
-                if (item.PreviousKeyState == null)
-                    item.PreviousKeyState = currentKeyState;
-                else
+                foreach (Keys leKey in item.KeyActionMap.Keys)
                 {
-                    if (currentKeyState == KeyState.Up && item.PreviousKeyState == KeyState.Down)
+                    KeyState currentKeyState = current.IsKeyDown(leKey) ? KeyState.Down : KeyState.Up;
+                    if (item.PreviousKeyStates[leKey] == null)
                     {
-                        item.OnClick();
+                        item.PreviousKeyStates[leKey] = currentKeyState;
                     }
-                    item.PreviousKeyState = currentKeyState;
+                    else
+                    {
+                        if (currentKeyState == KeyState.Up && item.PreviousKeyStates[leKey] == KeyState.Down)
+                        {
+                            Console.WriteLine("asdf");
+                            item.KeyActionMap[leKey]();
+                        }
+                        item.PreviousKeyStates[leKey] = currentKeyState;
+                    }
                 }
             }
         }

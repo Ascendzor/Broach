@@ -12,7 +12,12 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Broach
 {
-    class Ball
+    class Ball : Node
     {
+        public Ball(Texture2D texture, Vector2 position, Vector2 velocity)
+        {
+            Components.Add("PositionComponent", new PositionComponent(position));
+            Components.Add("RenderComponent", new RenderComponent(texture, (PositionComponent)Components["PositionComponent"]));
+        }
     }
 }

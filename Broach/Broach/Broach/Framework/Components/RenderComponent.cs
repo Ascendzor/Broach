@@ -16,7 +16,6 @@ namespace Broach
     {
         private Texture2D tex;
         private PositionComponent positionComponent;
-        private Vector2 position;
 
         /// <summary>
         /// creates a sprite component, this draws the given texture at the supposed rectangle

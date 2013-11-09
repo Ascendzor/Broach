@@ -14,9 +14,9 @@ namespace Broach
 {
     public class Node
     {
-        private List<GameComponent> components;
+        private Dictionary<string, GameComponent> components;
 
-        public List<GameComponent> Components
+        public Dictionary<string, GameComponent> Components
         {
             get { return components; }
             set { components = value; }
@@ -24,7 +24,7 @@ namespace Broach
         
         public Node()
         {
-            components = new List<GameComponent>();
+            components = new Dictionary<string, GameComponent>();
         }
     }
 }

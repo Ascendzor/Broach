@@ -24,6 +24,8 @@ namespace Broach
         // list to easily iterate through all systems
         public static Dictionary<string, GameSystem> Systems;
 
+        public static Dictionary<string, List<GameComponent>> AllComponents;
+
         // scene aspect updates the scene after any other updates have happened
         public static SceneController SceneController;
 
@@ -37,7 +39,6 @@ namespace Broach
 
         protected override void Initialize()
         {
-
             ((Form)Form.FromHandle(this.Window.Handle)).Cursor = System.Windows.Forms.Cursors.Cross;
             IsMouseVisible = true;
 
@@ -46,6 +47,10 @@ namespace Broach
             Systems.Add("ClickEvent", new ClickEventSystem());
             Systems.Add("OnKeyUp", new OnKeyUpSystem());
             Systems.Add("Script", new ScriptSystem());
+
+            AllComponents = new Dictionary<string, List<GameComponent>>();
+            AllComponents.Add("RenderComponent", new List<GameComponent>());
+            AllComponents.Add("PositionComponent", new List<GameComponent>());
 
             SceneController = new SceneController();
             SceneController.Handle(SceneFactory.getNewGame(Content, this));

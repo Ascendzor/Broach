@@ -21,6 +21,12 @@ namespace Broach
             get { return position; }
             set { position = value; }
         }
+
+        public void setY(float y)
+        {
+
+        }
+
         public PositionComponent(Vector2 position)
         {
             this.position = position;

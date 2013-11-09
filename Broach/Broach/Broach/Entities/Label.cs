@@ -18,7 +18,7 @@ namespace Broach
             Rectangle buttonSize = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
             PositionComponent pc = new PositionComponent(position);
             RenderComponent buttonSprite = new RenderComponent(texture,pc );
-            Components.Add(buttonSprite);
+            Components.Add("RenderComponent", buttonSprite);
         }
     }
 }
