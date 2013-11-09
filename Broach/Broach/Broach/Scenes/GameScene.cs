@@ -51,6 +51,8 @@ namespace Broach
                     ((PositionComponent)you.Components["PositionComponent"]).Position = new Vector2(myPosition.X, mouse.Y);
                 }
             });
+
+            Ball ball = new Ball(game.Content.Load<Texture2D>("ElmoBall"), new Vector2(485, 100), new Vector2(1, 0));
         }
         public override void onEnter()
         {

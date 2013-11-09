@@ -43,14 +43,16 @@ namespace Broach
             IsMouseVisible = true;
 
             Systems = new Dictionary<string, GameSystem>();
+            Systems.Add("Momentum", new MomentumSystem());
             Systems.Add("Render", new RenderSystem(new SpriteBatch(GraphicsDevice)));
             Systems.Add("ClickEvent", new ClickEventSystem());
             Systems.Add("OnKeyUp", new OnKeyUpSystem());
             Systems.Add("Script", new ScriptSystem());
 
             AllComponents = new Dictionary<string, List<GameComponent>>();
-            AllComponents.Add("RenderComponent", new List<GameComponent>());
             AllComponents.Add("PositionComponent", new List<GameComponent>());
+            AllComponents.Add("MomentumComponent", new List<GameComponent>());
+            AllComponents.Add("RenderComponent", new List<GameComponent>());
 
             SceneController = new SceneController();
             SceneController.Handle(SceneFactory.getNewGame(Content, this));

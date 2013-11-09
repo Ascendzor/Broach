@@ -31,7 +31,6 @@ namespace Broach
                     {
                         if (currentKeyState == KeyState.Up && item.PreviousKeyStates[leKey] == KeyState.Down)
                         {
-                            Console.WriteLine("asdf");
                             item.KeyActionMap[leKey]();
                         }
                         item.PreviousKeyStates[leKey] = currentKeyState;

@@ -18,6 +18,8 @@ namespace Broach
         {
             Components.Add("PositionComponent", new PositionComponent(position));
             Components.Add("RenderComponent", new RenderComponent(texture, (PositionComponent)Components["PositionComponent"]));
+            Components.Add("MomentumComponent", new MomentumComponent((PositionComponent)Components["PositionComponent"], velocity));
+            Console.WriteLine("ball made");
         }
     }
 }

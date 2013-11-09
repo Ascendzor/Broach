@@ -113,10 +113,12 @@
     <Compile Include="Entities\Ball.cs" />
     <Compile Include="Entities\Button.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Framework\Components\MomentumComponent.cs" />
     <Compile Include="Framework\Components\PositionComponent.cs" />
     <Compile Include="Entities\Walls.cs" />
     <Compile Include="Framework\Components\ClickEventComponent.cs" />
     <Compile Include="Framework\Components\GenericRenderComponent.cs" />
+    <Compile Include="Framework\Systems\MomentumSystem.cs" />
     <Compile Include="Scenes\GameScene.cs" />
     <Compile Include="Framework\Systems\ClickEventSystem.cs" />
     <Compile Include="Form1.cs">
